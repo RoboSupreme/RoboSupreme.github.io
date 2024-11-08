@@ -20,8 +20,8 @@
         align-items: center;
         overflow: hidden;
         background: linear-gradient(135deg, #ff7e5f, #feb47b);
-        animation: gradientAnimation 10s infinite alternate;
-        transition: background 1s ease;
+        animation: gradientAnimation 20s infinite alternate;
+        transition: background 2s ease;
       }
 
       @keyframes gradientAnimation {
@@ -55,75 +55,108 @@
         }
       }
 
-      button {
-        padding: 15px 30px;
-        background-color: #ff7e5f;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.5em;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-        margin-top: 20px;
-      }
-
-      button:hover {
-        background-color: #feb47b;
-      }
-
-      button:active {
-        transform: scale(0.95);
-      }
-
       /* Bubbles styles */
       .bubble {
         position: absolute;
-        bottom: -100px;
         border-radius: 50%;
         opacity: 0;
-        animation: dropBubble 8s infinite;
         pointer-events: none;
+        animation: bubblePhysics 15s infinite;
       }
 
-      @keyframes dropBubble {
+      @keyframes bubblePhysics {
         0% {
-          transform: translateX(0) translateY(0);
-          opacity: 0.7;
+          opacity: 0.8;
+          transform: scale(1) translateX(0) translateY(0);
         }
         50% {
-          transform: translateX(100px) translateY(-300px);
           opacity: 0.4;
+          transform: scale(1.5) translateX(200px) translateY(-500px);
         }
         100% {
-          transform: translateX(-100px) translateY(-600px);
           opacity: 0;
+          transform: scale(2) translateX(-200px) translateY(-1000px);
         }
       }
+
+      /* Customize the size and color of bubbles */
+      .bubble:nth-child(1) {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.7);
+        animation-duration: 12s;
+        animation-delay: 0s;
+      }
+
+      .bubble:nth-child(2) {
+        width: 150px;
+        height: 150px;
+        background: rgba(0, 255, 255, 0.6);
+        animation-duration: 16s;
+        animation-delay: 2s;
+      }
+
+      .bubble:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 0, 255, 0.5);
+        animation-duration: 14s;
+        animation-delay: 4s;
+      }
+
+      .bubble:nth-child(4) {
+        width: 180px;
+        height: 180px;
+        background: rgba(255, 255, 0, 0.5);
+        animation-duration: 18s;
+        animation-delay: 6s;
+      }
+
+      .bubble:nth-child(5) {
+        width: 130px;
+        height: 130px;
+        background: rgba(0, 255, 0, 0.5);
+        animation-duration: 20s;
+        animation-delay: 8s;
+      }
+
     </style>
   </head>
   <body>
     <div class="content">
       <p>Welcome to the Super Cool Interactive Page!</p>
-      <button onclick="changeBackground()">Click Me to Change Colors</button>
     </div>
 
     <!-- Bubble Divs -->
-    <div class="bubble" style="width: 80px; height: 80px; background: rgba(255, 255, 255, 0.5); animation-duration: 7s;"></div>
-    <div class="bubble" style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.4); animation-duration: 6s;"></div>
-    <div class="bubble" style="width: 100px; height: 100px; background: rgba(255, 255, 255, 0.3); animation-duration: 9s;"></div>
-    <div class="bubble" style="width: 50px; height: 50px; background: rgba(255, 255, 255, 0.6); animation-duration: 8s;"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
     <script>
-      function changeBackground() {
-        let colors = [
-          'linear-gradient(135deg, #ff7e5f, #feb47b)',
-          'linear-gradient(135deg, #6a11cb, #2575fc)',
-          'linear-gradient(135deg, #ff6a00, #ee0979)',
-          'linear-gradient(135deg, #43e97b, #38f9d7)',
-        ];
-        let randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.transition = 'background 1s ease';
-        document.body.style.background = randomColor;
+      // Function to generate random bubble positions and triggers
+      function generateBubbles() {
+        const bubbles = document.querySelectorAll('.bubble');
+        bubbles.forEach(bubble => {
+          // Randomize position on the screen
+          const startX = Math.random() * window.innerWidth;
+          const startY = window.innerHeight + 100; // Start below the screen
+
+          bubble.style.left = `${startX}px`;
+          bubble.style.top = `${startY}px`;
+
+          // Trigger animation by making bubbles appear with a delay
+          const delay = Math.random() * 5; // Delay random
+          bubble.style.animationDelay = `${delay}s`;
+        });
       }
+
+      // Generate bubbles every 2 seconds
+      setInterval(generateBubbles, 2000);
+
+      // Initial generation
+      generateBubbles();
     </script>
   </body>
 </html>
