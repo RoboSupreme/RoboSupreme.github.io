@@ -1,132 +1,306 @@
-// Set transition for smooth color change
-this.element.style.transition = 'background-color 6s linear';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Cool Interactive Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      /* Smooth background gradient animation */
+      background: linear-gradient(135deg, #ff7e5f, #feb47b, #6a11cb, #2575fc, #ff6a00, #ee0979, #ff7e5f);
+      background-size: 1400% 1400%;
+      animation: gradientAnimation 60s ease infinite;
+    }
 
-        // Set lifespan
-        this.lifespan = 6000; // 6 seconds
-        this.birthTime = Date.now();
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-// Flag to indicate if the bubble should shrink
-this.shrink = false;
-this.shrinkStartTime = null;
-@@ -195,8 +191,8 @@
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 2.5em;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      z-index: 1;
+    }
 
-if (shrinkRatio > 0) {
-this.size = this.originalSize * shrinkRatio;
-            this.vx *= shrinkRatio; // Slow down the bubble's speed as it shrinks
-            this.vy *= shrinkRatio;
-            this.vx *= 0.99; // Slow down the bubble's speed as it shrinks
-            this.vy *= 0.99;
-this.element.style.width = `${this.size}px`;
-this.element.style.height = `${this.size}px`;
-this.element.style.opacity = `${shrinkRatio * 0.8}`; // Fade out as it shrinks
-@@ -205,110 +201,105 @@
-}
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        // Check lifespan
-        if (Date.now() - this.birthTime > this.lifespan && !this.shrink) {
-          this.destroy();
+    /* Bubbles styles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      transition: background-color 6s linear;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <p>Welcome to the Super Cool Interactive Page!</p>
+  </div>
+
+  <script>
+    const colors = [
+      'rgba(255, 255, 255, 0.7)',
+      'rgba(0, 255, 255, 0.6)',
+      'rgba(255, 0, 255, 0.5)',
+      'rgba(255, 255, 0, 0.5)',
+      'rgba(0, 255, 0, 0.5)',
+      'rgba(255, 165, 0, 0.6)',
+      'rgba(138, 43, 226, 0.6)',
+      'rgba(0, 191, 255, 0.6)',
+      'rgba(173, 255, 47, 0.6)',
+      'rgba(255, 20, 147, 0.6)',
+      'rgba(75, 0, 130, 0.6)',
+      'rgba(255, 105, 180, 0.6)'
+    ];
+
+    const bubbles = [];
+    const bubbleCount = 25; // Total number of bubbles on screen
+
+    // Utility function to generate a random number within a range
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+        class Bubble {
+          constructor() {
+            this.createElement();
+            this.initProperties();
+            this.updatePosition();
+            this.animate();
+          }
+        
+          createElement() {
+            this.element = document.createElement('div');
+            this.element.classList.add('bubble');
+            document.body.appendChild(this.element);
+          }
+        
+          initProperties() {
+            // Random size between 50px and 150px
+            this.size = random(50, 150);
+            this.element.style.width = `${this.size}px`;
+            this.element.style.height = `${this.size}px`;
+        
+            // Random initial position within the viewport
+            this.x = random(0, window.innerWidth - this.size);
+            this.y = random(0, window.innerHeight - this.size);
+            this.element.style.left = `${this.x}px`;
+            this.element.style.top = `${this.y}px`;
+        
+            // Random velocity
+            const speed = random(0.5, 2); // Adjust speed as needed
+            const angle = random(0, 2 * Math.PI);
+            this.vx = Math.cos(angle) * speed;
+            this.vy = Math.sin(angle) * speed;
+        
+            // Random color from the palette
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.element.style.backgroundColor = this.color;
+        
+            // Set transition for smooth color change
+            this.element.style.transition = 'background-color 6s linear';
+        
+            // Set lifespan
+            this.lifespan = 6000; // 6 seconds
+            this.birthTime = Date.now();
+        
+            // Mass proportional to the size
+            this.mass = Math.PI * Math.pow(this.size / 2, 2); // Area of the bubble
+          }
+        
+          updatePosition() {
+            this.x += this.vx;
+            this.y += this.vy;
+        
+            // Collision with walls
+            let collided = false;
+            if (this.x <= 0) {
+              this.x = 0;
+              this.vx *= -1;
+              collided = true;
+            } else if (this.x + this.size >= window.innerWidth) {
+              this.x = window.innerWidth - this.size;
+              this.vx *= -1;
+              collided = true;
+            }
+        
+            if (this.y <= 0) {
+              this.y = 0;
+              this.vy *= -1;
+              collided = true;
+            } else if (this.y + this.size >= window.innerHeight) {
+              this.y = window.innerHeight - this.size;
+              this.vy *= -1;
+              collided = true;
+            }
+        
+            if (collided && !this.shrink) {
+              this.startShrinking();
+            }
+        
+            this.element.style.left = `${this.x}px`;
+            this.element.style.top = `${this.y}px`;
+          }
+        
+          startShrinking() {
+            if (!this.shrink) {
+              this.shrink = true;
+              this.shrinkStartTime = Date.now();
+            }
+          }
+        
+          animate() {
+            this.animation = requestAnimationFrame(() => this.animate());
+        
+            this.updatePosition();
+        
+            // Handle color changes
+            if (Math.random() < 0.001) { // Adjust probability as needed
+              const newColor = colors[Math.floor(Math.random() * colors.length)];
+              this.element.style.backgroundColor = newColor;
+            }
+        
+            // Handle shrinking
+            if (this.shrink) {
+              const elapsed = Date.now() - this.shrinkStartTime;
+              const shrinkDuration = 6000; // Increased shrink duration (slower shrinking)
+              const shrinkRatio = 1 - elapsed / shrinkDuration;
+        
+              if (shrinkRatio > 0) {
+                this.size = this.originalSize * shrinkRatio;
+                this.vx *= shrinkRatio; // Slow down the bubble's speed as it shrinks
+                this.vy *= shrinkRatio;
+                this.element.style.width = `${this.size}px`;
+                this.element.style.height = `${this.size}px`;
+                this.element.style.opacity = `${shrinkRatio * 0.8}`; // Fade out as it shrinks
+              } else {
+                this.destroy();
+              }
+            }
+        
+            // Check lifespan
+            if (Date.now() - this.birthTime > this.lifespan && !this.shrink) {
+              this.destroy();
+            }
+        
+            // Handle bubble-bubble collisions
+            bubbles.forEach(other => {
+              if (other !== this && this.isCollidingWith(other)) {
+                this.resolveCollision(other);
+              }
+            });
+          }
+        
+          isCollidingWith(other) {
+            const dx = (this.x + this.size / 2) - (other.x + other.size / 2);
+            const dy = (this.y + this.size / 2) - (other.y + other.size / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return distance < (this.size / 2 + other.size / 2);
+          }
+        
+          resolveCollision(other) {
+            // Vector from this bubble to the other bubble
+            const dx = (other.x + other.size / 2) - (this.x + this.size / 2);
+            const dy = (other.y + other.size / 2) - (this.y + this.size / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+        
+            if (distance === 0) return; // Prevent division by zero
+        
+            // Normal vector (unit vector)
+            const nx = dx / distance;
+            const ny = dy / distance;
+        
+            // Relative velocity along the normal
+            const dvx = this.vx - other.vx;
+            const dvy = this.vy - other.vy;
+            const dotProduct = dvx * nx + dvy * ny;
+        
+            // If the bubbles are moving apart, no need to resolve the collision
+            if (dotProduct > 0) return;
+        
+            // Calculate the impulse scalar using the formula for elastic collisions
+            const restitution = 1; // Perfectly elastic collision (no energy loss)
+            const impulse = (2 * dotProduct) / (this.mass + other.mass);
+        
+            // Apply the impulse to both bubbles
+            this.vx -= (impulse * other.mass * nx);
+            this.vy -= (impulse * other.mass * ny);
+            other.vx += (impulse * this.mass * nx);
+            other.vy += (impulse * this.mass * ny);
+        
+            // Resolve overlap
+            const overlap = 0.5 * (this.size / 2 + other.size / 2 - distance + 1);
+            this.x -= overlap * nx;
+            this.y -= overlap * ny;
+            other.x += overlap * nx;
+            other.y += overlap * ny;
+        
+            this.element.style.left = `${this.x}px`;
+            this.element.style.top = `${this.y}px`;
+            other.element.style.left = `${other.x}px`;
+            other.element.style.top = `${other.y}px`;
+          }
+        
+          destroy() {
+            cancelAnimationFrame(this.animation);
+            this.element.remove();
+            const index = bubbles.indexOf(this);
+            if (index > -1) {
+              bubbles.splice(index, 1);
+            }
+          }
         }
 
-// Handle bubble-bubble collisions
-bubbles.forEach(other => {
-if (other !== this && this.isCollidingWith(other)) {
-this.resolveCollision(other);
-}
-});
-}
+    // Initialize bubbles
+    function initBubbles() {
+      for (let i = 0; i < bubbleCount; i++) {
+        bubbles.push(new Bubble());
+      }
+    }
 
-isCollidingWith(other) {
-const dx = (this.x + this.size / 2) - (other.x + other.size / 2);
-const dy = (this.y + this.size / 2) - (other.y + other.size / 2);
-const distance = Math.sqrt(dx * dx + dy * dy);
-return distance < (this.size / 2 + other.size / 2);
-}
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      bubbles.forEach(bubble => {
+        bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.size));
+        bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.size));
+        bubble.element.style.left = `${bubble.x}px`;
+        bubble.element.style.top = `${bubble.y}px`;
+      });
+    });
 
-resolveCollision(other) {
-// Simple elastic collision response
+    // Periodically add new bubbles to maintain bubble count
+    setInterval(() => {
+      if (bubbles.length < bubbleCount) {
+        bubbles.push(new Bubble());
+      }
+    }, 2000);
 
-// Calculate the normal vector
-const dx = (other.x + other.size / 2) - (this.x + this.size / 2);
-const dy = (other.y + other.size / 2) - (this.y + this.size / 2);
-const distance = Math.sqrt(dx * dx + dy * dy);
-
-if (distance === 0) return; // Prevent division by zero
-
-const nx = dx / distance;
-const ny = dy / distance;
-
-// Calculate relative velocity
-const dvx = this.vx - other.vx;
-const dvy = this.vy - other.vy;
-
-// Calculate velocity along the normal
-const velAlongNormal = dvx * nx + dvy * ny;
-
-// Do not resolve if velocities are separating
-if (velAlongNormal > 0) return;
-
-// Coefficient of restitution (elastic collision)
-const restitution = 1;
-
-// Calculate impulse scalar
-const impulse = -(1 + restitution) * velAlongNormal / 2; // Assuming equal mass
-
-// Apply impulse to both bubbles
-this.vx += impulse * nx;
-this.vy += impulse * ny;
-other.vx -= impulse * nx;
-other.vy -= impulse * ny;
-
-// Prevent overlapping
-const overlap = 0.5 * (this.size / 2 + other.size / 2 - distance + 1);
-this.x -= overlap * nx;
-this.y -= overlap * ny;
-other.x += overlap * nx;
-other.y += overlap * ny;
-
-this.element.style.left = `${this.x}px`;
-this.element.style.top = `${this.y}px`;
-other.element.style.left = `${other.x}px`;
-other.element.style.top = `${other.y}px`;
-}
-
-destroy() {
-cancelAnimationFrame(this.animation);
-this.element.remove();
-const index = bubbles.indexOf(this);
-if (index > -1) {
-bubbles.splice(index, 1);
-}
-}
-}
-
-// Initialize bubbles
-function initBubbles() {
-for (let i = 0; i < bubbleCount; i++) {
-bubbles.push(new Bubble());
-}
-}
-
-// Handle window resize
-window.addEventListener('resize', () => {
-bubbles.forEach(bubble => {
-bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.size));
-bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.size));
-bubble.element.style.left = `${bubble.x}px`;
-bubble.element.style.top = `${bubble.y}px`;
-});
-});
-
-// Periodically add new bubbles to maintain bubble count
-setInterval(() => {
-if (bubbles.length < bubbleCount) {
-bubbles.push(new Bubble());
-}
-}, 2000);
-
-// Initialize on page load
-initBubbles();
-</script>
+    // Initialize on page load
+    initBubbles();
+  </script>
 </body>
 </html>
