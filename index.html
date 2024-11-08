@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Interactive Page</title>
+    <title>Super Cool Interactive Page</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         font-family: 'Arial', sans-serif;
         margin: 0;
@@ -34,10 +39,11 @@
       .content {
         text-align: center;
         color: white;
-        font-size: 2em;
+        font-size: 2.5em;
         letter-spacing: 2px;
         opacity: 0;
         animation: fadeIn 2s forwards;
+        z-index: 1;
       }
 
       @keyframes fadeIn {
@@ -50,13 +56,13 @@
       }
 
       button {
-        padding: 10px 20px;
+        padding: 15px 30px;
         background-color: #ff7e5f;
         border: none;
-        border-radius: 5px;
-        font-size: 1.2em;
+        border-radius: 10px;
+        font-size: 1.5em;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.2s;
         margin-top: 20px;
       }
 
@@ -67,13 +73,44 @@
       button:active {
         transform: scale(0.95);
       }
+
+      /* Bubbles styles */
+      .bubble {
+        position: absolute;
+        bottom: -100px;
+        border-radius: 50%;
+        opacity: 0;
+        animation: dropBubble 8s infinite;
+        pointer-events: none;
+      }
+
+      @keyframes dropBubble {
+        0% {
+          transform: translateX(0) translateY(0);
+          opacity: 0.7;
+        }
+        50% {
+          transform: translateX(100px) translateY(-300px);
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateX(-100px) translateY(-600px);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="content">
-      <p>Welcome to the Cool Interactive Page!</p>
+      <p>Welcome to the Super Cool Interactive Page!</p>
       <button onclick="changeBackground()">Click Me to Change Colors</button>
     </div>
+
+    <!-- Bubble Divs -->
+    <div class="bubble" style="width: 80px; height: 80px; background: rgba(255, 255, 255, 0.5); animation-duration: 7s;"></div>
+    <div class="bubble" style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.4); animation-duration: 6s;"></div>
+    <div class="bubble" style="width: 100px; height: 100px; background: rgba(255, 255, 255, 0.3); animation-duration: 9s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; background: rgba(255, 255, 255, 0.6); animation-duration: 8s;"></div>
 
     <script>
       function changeBackground() {
@@ -84,6 +121,7 @@
           'linear-gradient(135deg, #43e97b, #38f9d7)',
         ];
         let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.transition = 'background 1s ease';
         document.body.style.background = randomColor;
       }
     </script>
