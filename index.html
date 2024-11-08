@@ -1,162 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Cool Interactive Page</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        background: linear-gradient(135deg, #ff7e5f, #feb47b);
-        animation: gradientAnimation 20s infinite alternate;
-        transition: background 2s ease;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Cool Interactive Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transition: background 2s ease;
+      position: relative;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-size: 2.5em;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      z-index: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Bubbles styles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      transition: background-color 6s linear;
+    }
+
+    /* Define a palette of colors */
+    @keyframes colorChange {
+      0% { background-color: rgba(255, 255, 255, 0.7); }
+      25% { background-color: rgba(0, 255, 255, 0.6); }
+      50% { background-color: rgba(255, 0, 255, 0.5); }
+      75% { background-color: rgba(255, 255, 0, 0.5); }
+      100% { background-color: rgba(0, 255, 0, 0.5); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="content">
+    <p>Welcome to the Super Cool Interactive Page!</p>
+  </div>
+
+  <script>
+    const colors = [
+      'rgba(255, 255, 255, 0.7)',
+      'rgba(0, 255, 255, 0.6)',
+      'rgba(255, 0, 255, 0.5)',
+      'rgba(255, 255, 0, 0.5)',
+      'rgba(0, 255, 0, 0.5)',
+      'rgba(255, 165, 0, 0.6)',
+      'rgba(138, 43, 226, 0.6)',
+      'rgba(0, 191, 255, 0.6)',
+      'rgba(173, 255, 47, 0.6)'
+    ];
+
+    const bubbles = [];
+    const bubbleCount = 20; // Total number of bubbles on screen
+
+    // Bubble class to handle properties and movement
+    class Bubble {
+      constructor() {
+        this.createElement();
+        this.initProperties();
+        this.updatePosition();
+        this.animate();
       }
 
-      @keyframes gradientAnimation {
-        0% {
-          background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      createElement() {
+        this.element = document.createElement('div');
+        this.element.classList.add('bubble');
+        document.body.appendChild(this.element);
+      }
+
+      initProperties() {
+        // Random size between 50px and 150px
+        this.size = Math.random() * 100 + 50;
+        this.element.style.width = `${this.size}px`;
+        this.element.style.height = `${this.size}px`;
+
+        // Random initial position within the viewport
+        this.x = Math.random() * (window.innerWidth - this.size);
+        this.y = Math.random() * (window.innerHeight - this.size);
+        this.element.style.left = `${this.x}px`;
+        this.element.style.top = `${this.y}px`;
+
+        // Random velocity
+        const speed = 1 + Math.random() * 2;
+        const angle = Math.random() * 2 * Math.PI;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+
+        // Random color from the palette
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.element.style.backgroundColor = this.color;
+
+        // Set transition for smooth color change
+        this.element.style.transition = 'background-color 6s linear';
+
+        // Set lifespan
+        this.lifespan = 6000; // 6 seconds
+        this.birthTime = Date.now();
+      }
+
+      updatePosition() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Collision with walls
+        if (this.x <= 0 || this.x + this.size >= window.innerWidth) {
+          this.vx *= -1;
+          this.x = Math.max(0, Math.min(this.x, window.innerWidth - this.size));
         }
-        50% {
-          background: linear-gradient(135deg, #6a11cb, #2575fc);
+        if (this.y <= 0 || this.y + this.size >= window.innerHeight) {
+          this.vy *= -1;
+          this.y = Math.max(0, Math.min(this.y, window.innerHeight - this.size));
         }
-        100% {
-          background: linear-gradient(135deg, #ff6a00, #ee0979);
-        }
+
+        this.element.style.left = `${this.x}px`;
+        this.element.style.top = `${this.y}px`;
       }
 
-      .content {
-        text-align: center;
-        color: white;
-        font-size: 2.5em;
-        letter-spacing: 2px;
-        opacity: 0;
-        animation: fadeIn 2s forwards;
-        z-index: 1;
-      }
+      animate() {
+        this.animation = requestAnimationFrame(() => this.animate());
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
+        this.updatePosition();
 
-      /* Bubbles styles */
-      .bubble {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0;
-        pointer-events: none;
-        animation: bubblePhysics 15s infinite;
-      }
+        // Change color gradually
+        if (Math.random() < 0.005) { // 0.5% chance to change color each frame
+          const newColor = colors[Math.floor(Math.random() * colors.length)];
+          this.element.style.backgroundColor = newColor;
+        }
 
-      @keyframes bubblePhysics {
-        0% {
-          opacity: 0.8;
-          transform: scale(1) translateX(0) translateY(0);
-        }
-        50% {
-          opacity: 0.4;
-          transform: scale(1.5) translateX(200px) translateY(-500px);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(2) translateX(-200px) translateY(-1000px);
+        // Check lifespan
+        if (Date.now() - this.birthTime > this.lifespan) {
+          this.destroy();
         }
       }
 
-      /* Customize the size and color of bubbles */
-      .bubble:nth-child(1) {
-        width: 120px;
-        height: 120px;
-        background: rgba(255, 255, 255, 0.7);
-        animation-duration: 12s;
-        animation-delay: 0s;
+      destroy() {
+        cancelAnimationFrame(this.animation);
+        this.element.remove();
+        const index = bubbles.indexOf(this);
+        if (index > -1) {
+          bubbles.splice(index, 1);
+        }
       }
+    }
 
-      .bubble:nth-child(2) {
-        width: 150px;
-        height: 150px;
-        background: rgba(0, 255, 255, 0.6);
-        animation-duration: 16s;
-        animation-delay: 2s;
+    // Initialize bubbles
+    function initBubbles() {
+      for (let i = 0; i < bubbleCount; i++) {
+        bubbles.push(new Bubble());
       }
+    }
 
-      .bubble:nth-child(3) {
-        width: 100px;
-        height: 100px;
-        background: rgba(255, 0, 255, 0.5);
-        animation-duration: 14s;
-        animation-delay: 4s;
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      bubbles.forEach(bubble => {
+        bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.size));
+        bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.size));
+        bubble.element.style.left = `${bubble.x}px`;
+        bubble.element.style.top = `${bubble.y}px`;
+      });
+    });
+
+    // Periodically add new bubbles to maintain bubble count
+    setInterval(() => {
+      if (bubbles.length < bubbleCount) {
+        bubbles.push(new Bubble());
       }
+    }, 2000);
 
-      .bubble:nth-child(4) {
-        width: 180px;
-        height: 180px;
-        background: rgba(255, 255, 0, 0.5);
-        animation-duration: 18s;
-        animation-delay: 6s;
-      }
-
-      .bubble:nth-child(5) {
-        width: 130px;
-        height: 130px;
-        background: rgba(0, 255, 0, 0.5);
-        animation-duration: 20s;
-        animation-delay: 8s;
-      }
-
-    </style>
-  </head>
-  <body>
-    <div class="content">
-      <p>Welcome to the Super Cool Interactive Page!</p>
-    </div>
-
-    <!-- Bubble Divs -->
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
-    <script>
-      // Function to generate random bubble positions and triggers
-      function generateBubbles() {
-        const bubbles = document.querySelectorAll('.bubble');
-        bubbles.forEach(bubble => {
-          // Randomize position on the screen
-          const startX = Math.random() * window.innerWidth;
-          const startY = window.innerHeight + 100; // Start below the screen
-
-          bubble.style.left = `${startX}px`;
-          bubble.style.top = `${startY}px`;
-
-          // Trigger animation by making bubbles appear with a delay
-          const delay = Math.random() * 5; // Delay random
-          bubble.style.animationDelay = `${delay}s`;
-        });
-      }
-
-      // Generate bubbles every 2 seconds
-      setInterval(generateBubbles, 2000);
-
-      // Initial generation
-      generateBubbles();
-    </script>
-  </body>
+    // Initialize on page load
+    initBubbles();
+  </script>
+</body>
 </html>
