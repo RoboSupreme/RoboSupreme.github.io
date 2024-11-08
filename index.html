@@ -131,6 +131,8 @@
 
         // Flag to indicate if the bubble should shrink
         this.shrink = false;
+        this.shrinkStartTime = null;
+        this.originalSize = this.size;
       }
 
       updatePosition() {
@@ -168,9 +170,10 @@
       }
 
       startShrinking() {
-        this.shrink = true;
-        this.shrinkStartTime = Date.now();
-        this.originalSize = this.size;
+        if (!this.shrink) {
+          this.shrink = true;
+          this.shrinkStartTime = Date.now();
+        }
       }
 
       animate() {
@@ -187,11 +190,13 @@
         // Handle shrinking
         if (this.shrink) {
           const elapsed = Date.now() - this.shrinkStartTime;
-          const shrinkDuration = 2000; // 2 seconds to shrink
+          const shrinkDuration = 6000; // Increased shrink duration (slower shrinking)
           const shrinkRatio = 1 - elapsed / shrinkDuration;
 
           if (shrinkRatio > 0) {
             this.size = this.originalSize * shrinkRatio;
+            this.vx *= shrinkRatio; // Slow down the bubble's speed as it shrinks
+            this.vy *= shrinkRatio;
             this.element.style.width = `${this.size}px`;
             this.element.style.height = `${this.size}px`;
             this.element.style.opacity = `${shrinkRatio * 0.8}`; // Fade out as it shrinks
