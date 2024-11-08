@@ -1,10 +1,91 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Interactive Page</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        animation: gradientAnimation 10s infinite alternate;
+        transition: background 1s ease;
+      }
 
-    
+      @keyframes gradientAnimation {
+        0% {
+          background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        }
+        50% {
+          background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+        100% {
+          background: linear-gradient(135deg, #ff6a00, #ee0979);
+        }
+      }
+
+      .content {
+        text-align: center;
+        color: white;
+        font-size: 2em;
+        letter-spacing: 2px;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #ff7e5f;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+      }
+
+      button:hover {
+        background-color: #feb47b;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+    </style>
   </head>
   <body>
-    <p>test</p>
+    <div class="content">
+      <p>Welcome to the Cool Interactive Page!</p>
+      <button onclick="changeBackground()">Click Me to Change Colors</button>
+    </div>
+
+    <script>
+      function changeBackground() {
+        let colors = [
+          'linear-gradient(135deg, #ff7e5f, #feb47b)',
+          'linear-gradient(135deg, #6a11cb, #2575fc)',
+          'linear-gradient(135deg, #ff6a00, #ee0979)',
+          'linear-gradient(135deg, #43e97b, #38f9d7)',
+        ];
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.background = randomColor;
+      }
+    </script>
   </body>
 </html>
