@@ -125,10 +125,6 @@
         // Set transition for smooth color change
         this.element.style.transition = 'background-color 6s linear';
 
-        // Set lifespan
-        this.lifespan = 6000; // 6 seconds
-        this.birthTime = Date.now();
-
         // Flag to indicate if the bubble should shrink
         this.shrink = false;
         this.shrinkStartTime = null;
@@ -195,19 +191,14 @@
 
           if (shrinkRatio > 0) {
             this.size = this.originalSize * shrinkRatio;
-            this.vx *= shrinkRatio; // Slow down the bubble's speed as it shrinks
-            this.vy *= shrinkRatio;
+            this.vx *= 0.99; // Slow down the bubble's speed as it shrinks
+            this.vy *= 0.99;
             this.element.style.width = `${this.size}px`;
             this.element.style.height = `${this.size}px`;
             this.element.style.opacity = `${shrinkRatio * 0.8}`; // Fade out as it shrinks
           } else {
             this.destroy();
           }
-        }
-
-        // Check lifespan
-        if (Date.now() - this.birthTime > this.lifespan && !this.shrink) {
-          this.destroy();
         }
 
         // Handle bubble-bubble collisions
