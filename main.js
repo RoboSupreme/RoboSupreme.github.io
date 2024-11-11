@@ -551,7 +551,7 @@ async function handleScandalEvent() {
   updateStateIndicator('Scandal Event');
 
   // 30% chance of scandal occurring
-  const scandalOccurs = Math.random() < 0.4;
+  const scandalOccurs = Math.random() < 0.3;
 
   // Remove any existing response
   if (renderer.responseElement) {
