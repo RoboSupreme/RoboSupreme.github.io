@@ -1,0 +1,158 @@
+/* styles.css */
+
+body {
+  margin: 50px;
+  font-size: 16px;
+  font-family: 'Inconsolata', monospace;
+  background-color: #434b50;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#game-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #8ac4cf;
+}
+
+p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #ba847a;
+  font-weight: bold;
+  user-select: none;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button.disabled {
+  cursor: auto;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.message, .response, .stats, .state-indicator {
+  margin: 10px 0;
+}
+
+.stats {
+  background-color: rgba(67, 75, 80, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.state-indicator {
+  font-weight: bold;
+  color: #f29696;
+}
+
+.activity-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.activity-option .button {
+  margin-right: 10px;
+}
+
+.description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#game-container .button {
+  margin-bottom: 0;
+}
+
+.hover-text {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  position: fixed;
+  margin-left: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.dialog {
+  display: block;
+  text-align: left;
+  max-width: 500px;
+  max-height: 50vh;
+  overflow: auto;
+  background-color: rgba(67, 75, 80, 0.8);
+  padding: 20px;
+}
+
+.dialog-heading {
+  color: #f29696;
+  font-weight: bold;
+}
+
+.close-button {
+  float: right;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #ba847a;
+  font-weight: bold;
+  user-select: none;
+}
+
+.close-button.disabled {
+  cursor: auto;
+  opacity: 0.5;
+}
+
+.info-button {
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: none;
+}
+
+.info-button:hover {
+  color: #ba847a;
+}
+
+.ballon-dor-count {
+  color: gold;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.gold-text {
+  color: gold;
+  font-weight: bold;
+}
+
+.progress-bar {
+  background-color: #555;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+  margin: 5px 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #ba847a;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
