@@ -690,16 +690,16 @@ function calculateWinningChances() {
               baseWinChance = gameState.preparationPercentage + 50;
               break;
           case 'copaDelRey':
-              baseWinChance = gameState.preparationPercentage + 10;
+              baseWinChance = gameState.preparationPercentage;
               break;
           case 'championsLeague':
-              baseWinChance = gameState.preparationPercentage - 30;
+              baseWinChance = gameState.preparationPercentage - 40;
               break;
           case 'copaAmerica':
-              baseWinChance = gameState.preparationPercentage - 10;
+              baseWinChance = gameState.preparationPercentage - 20;
               break;
           case 'worldCup':
-              baseWinChance = gameState.preparationPercentage - 40;
+              baseWinChance = gameState.preparationPercentage - 50;
               break;
       }
 
