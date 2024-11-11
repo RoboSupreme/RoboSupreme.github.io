@@ -155,7 +155,7 @@ async function playSemester() {
   }
 
   // Check Game Over Conditions
-  if (gameState.officialsPopularity >= 100) {
+  if (gameState.officialsPopularity >= 50) {
     gameState.gameOver = true;
     showSpecialEnding();
     return;
