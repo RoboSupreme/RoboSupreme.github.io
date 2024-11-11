@@ -61,7 +61,7 @@ function startGame() {
       timeUnits: 0,
       fanPopularity: 5,
       officialsPopularity: 5,
-      preparationPercentage: 30,
+      preparationPercentage: 40,
       restTime: 0,
       marketingOpportunities: 0,
       goals: 0,
@@ -103,7 +103,7 @@ async function playSemester() {
     gameState.timeUnitsNextSemester = 0; // Reset for the next semester
   }
   gameState.marketingOpportunities = getRandomInt(2, 4);
-  gameState.preparationPercentage = 30;
+  gameState.preparationPercentage = 40;
   gameState.restTime = 0;
   gameState.celebrationOccurred = false;
   gameState.goals = 0;
@@ -655,7 +655,7 @@ function createProgressBar(value) {
     createElement('div', 'progress-bar-fill', '')
   ]);
   const fillElement = progressBar.querySelector('.progress-bar-fill');
-  fillElement.style.width = Math.min(value, 50) + '%';
+  fillElement.style.width = 2 * Math.min(value, 100) + '%';
   return progressBar;
 }
 
