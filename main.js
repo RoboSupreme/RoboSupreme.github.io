@@ -655,7 +655,7 @@ function createProgressBar(value) {
     createElement('div', 'progress-bar-fill', '')
   ]);
   const fillElement = progressBar.querySelector('.progress-bar-fill');
-  fillElement.style.width = Math.min(value, 100) + '%';
+  fillElement.style.width = Math.min(value, 50) + '%';
   return progressBar;
 }
 
