@@ -1,0 +1,244 @@
+/* Reset default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #333333; /* Dark gray background */
+  color: #e0e0e0;            /* Light gray text */
+}
+
+/* Center container */
+.container {
+  display: flex;
+  flex-direction: column; /* Vertical stacking */
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px; /* Added top margin */
+}
+
+/* Heading style */
+h1 {
+  font-size: 48px;
+  color: #e0e0e0; /* Light gray text */
+  margin-bottom: 40px; /* Space below the heading */
+}
+
+/* Button style */
+.button {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #333333; /* Dark gray background */
+  color: #e0e0e0;            /* Light gray text */
+  font-size: 24px;
+  text-decoration: none;
+  border: 2px solid #ffffff; /* White border */
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+/* Adjust text and arrow position */
+.button-text {
+  margin-right: auto; /* Push text to the left */
+  transition: margin 0.3s ease;
+}
+
+.button-arrow {
+  margin-left: auto; /* Push arrow to the right */
+  transition: margin 0.3s ease;
+}
+
+/* Button hover effect */
+.button:hover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+  color: #333333;            /* Dark gray text on hover */
+}
+
+/* Change text and arrow color on hover */
+.button:hover .button-text,
+.button:hover .button-arrow {
+  color: #333333;
+}
+
+/* Adjust text and arrow spacing on hover */
+.button:hover .button-text {
+  margin-right: 15px;
+}
+
+.button:hover .button-arrow {
+  margin-left: 15px;
+}
+
+/* Style for additional content sections */
+.content-section {
+  padding: 50px;
+  text-align: center;
+  color: #e0e0e0;
+  font-size: 24px;
+}
+
+/* Rotating Letters Animation */
+.rotating-letters {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 125px;    /* Adjust as needed */
+  height: 175px;
+  pointer-events: none;
+  z-index: 3; /* Adjust z-index to ensure visibility */
+}
+
+.letter-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.letter {
+  display: block;
+  transform-origin: center center;
+  font-size: 40px; /* Adjust as needed */
+  color: #e0e0e0;
+  text-align: center;
+}
+
+/* Menu Button Styles */
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 4; /* Ensure the button stays on top */
+  width: 75px;
+  height: 100px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The hamburger lines */
+.menu-btn__burger,
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  width: 35px;
+  height: 3px;
+  background-color: #e0e0e0; /* Light gray */
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-btn__burger {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.menu-btn__burger::before {
+  transform: translateY(-10px);
+}
+
+.menu-btn__burger::after {
+  transform: translateY(10px);
+}
+
+/* Animation to "X" when menu is open */
+.menu-btn.open .menu-btn__burger {
+  transform: rotate(45deg);
+  background-color: #e0e0e0; /* Ensure color stays the same */
+}
+
+.menu-btn.open .menu-btn__burger::before {
+  transform: rotate(-90deg);
+  top: 0;
+}
+
+.menu-btn.open .menu-btn__burger::after {
+  transform: rotate(-90deg);
+  top: 0;
+}
+
+/* Menu Overlay Styles */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.95); /* Semi-transparent dark background */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* Below the menu button */
+}
+
+.menu-overlay nav ul {
+  list-style: none;
+  text-align: center;
+}
+
+.menu-overlay nav ul li {
+  margin: 20px 0;
+}
+
+.menu-overlay nav ul li a {
+  color: #e0e0e0;
+  font-size: 36px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-overlay nav ul li a:hover {
+  color: #ffffff;
+}
+
+/* Show the overlay when menu is open */
+.menu-overlay.open {
+  display: flex;
+}
+
+/* Matter.js Container and Canvas Styling */
+#matter-container {
+  width: 100%;
+  height: 500px; /* Adjust the height as needed */
+  position: relative;
+  overflow: visible; /* Allow content outside the container to be visible */
+  margin: 50px 0; /* Add margin to space it within the content */
+  z-index: 3; /* Ensure it's above background elements */
+}
+
+#matter-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Adjust z-indexes to ensure elements stack correctly */
+.rotating-letters {
+  z-index: 3;
+}
+
+.menu-btn {
+  z-index: 4;
+}
+
+.menu-overlay {
+  z-index: 2;
+}
+
+/* Ensure background elements have lower z-index */
+.background-element {
+  position: relative;
+  z-index: 1; /* Lower than the matter-container */
+}
