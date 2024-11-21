@@ -1,14 +1,155 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Satirical Footballer Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Jerry Zhang</title>
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Link to your stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Include jQuery -->
+    <script src="jquery.min.js"></script>
+    <!-- Include Matter.js -->
+    <script src="matter.js"></script>
 </head>
 <body>
-    <div id="game-container"></div>
+
+    <!-- Rotating Letters Animation -->
+    <div class="rotating-letters">
+        <div class="letter-container">
+            <span class="letter">Z</span>
+        </div>
+        <div class="letter-container">
+            <span class="letter">Z</span>
+        </div>
+        <div class="letter-container">
+            <span class="letter">H</span>
+        </div>
+    </div>
+
+    <!-- Menu Button -->
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="menu-btn__burger"></span>
+    </button>
+
+    <!-- Navigation Menu Overlay -->
+    <div class="menu-overlay" id="menu-overlay">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Jerry Zhang</h1>
+        <a href="https://github.com/RoboSupreme" class="button">
+            <span class="button-text">OH YEA</span>
+            <span class="button-arrow">➔</span>
+        </a>
+    </div>
+
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+    <!-- Additional content for scrolling -->
+    <div class="content-section">
+        <p>Welcome to my personal webpage. Scroll down to see more content and experience the animation.</p>
+    </div>
+    <div class="content-section">
+        <p>Here's some more content to create scrolling space.</p>
+    </div>
+    <div class="content-section">
+        <p>Keep scrolling to see the letters rotate!</p>
+    </div>
+
+    <!-- Matter.js Canvas -->
+    <div id="matter-container">
+        <canvas id="matter-canvas"></canvas>
+    </div>
+
+    <!-- Include your JavaScript file -->
     <script src="main.js"></script>
 </body>
 </html>
