@@ -108,7 +108,7 @@ var runner = Runner.create();
 Runner.run(runner, engine);
 
 // Updated letters array
-var letters = ['V', 'W', 'Y']; // You can add more letters if you'd like
+var letters = ['S', 'C', 'Y']; // You can add more letters if you'd like
 
 // Function to create letter bodies with updates
 function createLetterBodies() {

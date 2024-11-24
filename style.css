@@ -9,6 +9,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #333333; /* Dark gray background */
   color: #e0e0e0;            /* Light gray text */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Center container */
@@ -24,7 +25,51 @@ body {
 h1 {
   font-size: 48px;
   color: #e0e0e0; /* Light gray text */
-  margin-bottom: 40px; /* Space below the heading */
+  margin-bottom: 20px; /* Space below the heading */
+  animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+/* Typing Animation Styles */
+.typing-animation {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #e81c4f;
+  font-size: 24px;
+  animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+  margin-bottom: 40px;
+}
+
+/* Typing Effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 30%;
+  }
+}
+
+/* Blinking Cursor */
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #e81c4f;
+  }
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 /* Button style */
@@ -222,6 +267,78 @@ h1 {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #222222;
+  color: #dddddd;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode p,
+body.dark-mode a,
+body.dark-mode .button,
+body.dark-mode .letter,
+body.dark-mode .menu-btn__burger,
+body.dark-mode .menu-btn__burger::before,
+body.dark-mode .menu-btn__burger::after {
+  color: #dddddd;
+  background-color: #333333;
+}
+
+body.dark-mode .menu-overlay {
+  background-color: rgba(34, 34, 34, 0.95);
+}
+
+body.dark-mode .menu-overlay nav ul li a {
+  color: #dddddd;
+}
+
+body.dark-mode .menu-overlay nav ul li a:hover {
+  color: #ffffff;
+}
+
+body.dark-mode .button {
+  background-color: #333333;
+  border-color: #dddddd;
+}
+
+body.dark-mode .button:hover {
+  background-color: #dddddd;
+  color: #333333;
+}
+
+body.dark-mode .typing-animation {
+  border-right-color: #ff79c6;
+}
+
+/* Dark Mode Toggle Button Styles */
+#darkModeToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: #e81c4f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 5; /* Ensure it stays on top */
+  transition: background-color 0.3s;
+}
+
+#darkModeToggle:hover {
+  background-color: #c70a37;
+}
+
+body.dark-mode #darkModeToggle {
+  background-color: #6272a4;
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: #44475a;
 }
 
 /* Adjust z-indexes to ensure elements stack correctly */
