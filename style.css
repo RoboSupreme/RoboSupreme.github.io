@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #333333; /* Dark gray background */
-  color: #e0e0e0;            /* Light gray text */
+  background-color: #ffffff; /* Changed to white for a lighter background */
+  color: #333333;            /* Changed to dark gray for text */
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -24,7 +24,7 @@ body {
 /* Heading style */
 h1 {
   font-size: 48px;
-  color: #e0e0e0; /* Light gray text */
+  color: #333333; /* Changed to dark gray for the heading text */
   margin-bottom: 20px; /* Space below the heading */
   animation: float 3s ease-in-out infinite; /* Floating animation */
 }
@@ -34,20 +34,10 @@ h1 {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  border-right: 3px solid #e81c4f;
+  border-right: 3px solid #007BFF; /* Changed to blue for the cursor */
   font-size: 24px;
   animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
   margin-bottom: 40px;
-}
-
-/* Typing Effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 30%;
-  }
 }
 
 /* Blinking Cursor */
@@ -57,7 +47,7 @@ h1 {
     border-color: transparent;
   }
   50% {
-    border-color: #e81c4f;
+    border-color: #007BFF; /* Changed to blue for the cursor blink */
   }
 }
 
@@ -77,11 +67,11 @@ h1 {
   display: flex;
   align-items: center;
   padding: 15px 30px;
-  background-color: #333333; /* Dark gray background */
-  color: #e0e0e0;            /* Light gray text */
+  background-color: #ffffff; /* Changed to white for the button background */
+  color: #333333;            /* Changed to dark gray for the button text */
   font-size: 24px;
   text-decoration: none;
-  border: 2px solid #ffffff; /* White border */
+  border: 2px solid #333333; /* Changed to dark gray for the button border */
   border-radius: 5px;
   transition: all 0.3s ease;
 }
@@ -99,14 +89,14 @@ h1 {
 
 /* Button hover effect */
 .button:hover {
-  background-color: #e0e0e0; /* Light gray background on hover */
-  color: #333333;            /* Dark gray text on hover */
+  background-color: #007BFF; /* Changed to blue for button hover background */
+  color: #ffffff;            /* White text on hover */
 }
 
 /* Change text and arrow color on hover */
 .button:hover .button-text,
 .button:hover .button-arrow {
-  color: #333333;
+  color: #ffffff;
 }
 
 /* Adjust text and arrow spacing on hover */
@@ -122,7 +112,7 @@ h1 {
 .content-section {
   padding: 50px;
   text-align: center;
-  color: #e0e0e0;
+  color: #333333; /* Changed to dark gray for section text */
   font-size: 24px;
 }
 
@@ -131,7 +121,7 @@ h1 {
   position: fixed;
   top: 0;
   left: 0;
-  width: 125px;    /* Adjust as needed */
+  width: 125px;
   height: 175px;
   pointer-events: none;
   z-index: 3; /* Adjust z-index to ensure visibility */
@@ -147,7 +137,7 @@ h1 {
   display: block;
   transform-origin: center center;
   font-size: 40px; /* Adjust as needed */
-  color: #e0e0e0;
+  color: #333333;  /* Changed to dark gray for the letters */
   text-align: center;
 }
 
@@ -173,7 +163,7 @@ h1 {
 .menu-btn__burger::after {
   width: 35px;
   height: 3px;
-  background-color: #e0e0e0; /* Light gray */
+  background-color: #333333; /* Changed to dark gray for menu lines */
   border-radius: 5px;
   transition: all 0.5s ease-in-out;
 }
@@ -201,7 +191,7 @@ h1 {
 /* Animation to "X" when menu is open */
 .menu-btn.open .menu-btn__burger {
   transform: rotate(45deg);
-  background-color: #e0e0e0; /* Ensure color stays the same */
+  background-color: #333333; /* Ensure color stays the same */
 }
 
 .menu-btn.open .menu-btn__burger::before {
@@ -221,7 +211,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(51, 51, 51, 0.95); /* Semi-transparent dark background */
+  background-color: rgba(255, 255, 255, 0.95); /* Changed to white with transparency */
   display: none;
   align-items: center;
   justify-content: center;
@@ -238,14 +228,14 @@ h1 {
 }
 
 .menu-overlay nav ul li a {
-  color: #e0e0e0;
+  color: #333333; /* Changed to dark gray for menu links */
   font-size: 36px;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .menu-overlay nav ul li a:hover {
-  color: #ffffff;
+  color: #007BFF; /* Changed to blue for menu link hover */
 }
 
 /* Show the overlay when menu is open */
@@ -271,47 +261,57 @@ h1 {
 
 /* Dark Mode Styles */
 body.dark-mode {
-  background-color: #222222;
-  color: #dddddd;
+  background-color: #121212; /* Changed to a darker background */
+  color: #e0e0e0;            /* Changed to light gray text */
 }
 
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode p,
 body.dark-mode a,
-body.dark-mode .button,
-body.dark-mode .letter,
-body.dark-mode .menu-btn__burger,
-body.dark-mode .menu-btn__burger::before,
-body.dark-mode .menu-btn__burger::after {
-  color: #dddddd;
-  background-color: #333333;
+body.dark-mode .letter {
+  color: #e0e0e0; /* Light gray text in dark mode */
 }
 
+/* Menu Overlay Styles in Dark Mode */
 body.dark-mode .menu-overlay {
-  background-color: rgba(34, 34, 34, 0.95);
+  background-color: rgba(18, 18, 18, 0.95); /* Darker overlay background */
 }
 
 body.dark-mode .menu-overlay nav ul li a {
-  color: #dddddd;
+  color: #e0e0e0; /* Light gray menu links in dark mode */
 }
 
 body.dark-mode .menu-overlay nav ul li a:hover {
-  color: #ffffff;
+  color: #BB86FC; /* Changed to purple for menu link hover in dark mode */
 }
 
+/* Button Styles in Dark Mode */
 body.dark-mode .button {
-  background-color: #333333;
-  border-color: #dddddd;
+  background-color: transparent; /* Transparent background */
+  border-color: #e0e0e0;         /* Light gray border */
+  color: #e0e0e0;                /* Light gray text */
 }
 
 body.dark-mode .button:hover {
-  background-color: #dddddd;
-  color: #333333;
+  background-color: #BB86FC; /* Purple background on hover */
+  color: #121212;            /* Dark text on hover */
 }
 
+/* Menu Button Colors in Dark Mode */
+body.dark-mode .menu-btn__burger,
+body.dark-mode .menu-btn__burger::before,
+body.dark-mode .menu-btn__burger::after {
+  background-color: #e0e0e0; /* Light gray lines in dark mode */
+}
+
+body.dark-mode .menu-btn.open .menu-btn__burger {
+  background-color: #e0e0e0;
+}
+
+/* Typing Animation Cursor Color in Dark Mode */
 body.dark-mode .typing-animation {
-  border-right-color: #ff79c6;
+  border-right-color: #BB86FC; /* Purple cursor in dark mode */
 }
 
 /* Dark Mode Toggle Button Styles */
@@ -320,7 +320,7 @@ body.dark-mode .typing-animation {
   bottom: 20px;
   right: 20px;
   padding: 10px 15px;
-  background-color: #e81c4f;
+  background-color: #007BFF; /* Blue background for toggle button */
   color: white;
   border: none;
   cursor: pointer;
@@ -330,15 +330,15 @@ body.dark-mode .typing-animation {
 }
 
 #darkModeToggle:hover {
-  background-color: #c70a37;
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 body.dark-mode #darkModeToggle {
-  background-color: #6272a4;
+  background-color: #BB86FC; /* Purple background in dark mode */
 }
 
 body.dark-mode #darkModeToggle:hover {
-  background-color: #44475a;
+  background-color: #9c27b0; /* Darker purple on hover */
 }
 
 /* Adjust z-indexes to ensure elements stack correctly */
@@ -359,3 +359,14 @@ body.dark-mode #darkModeToggle:hover {
   position: relative;
   z-index: 1; /* Lower than the matter-container */
 }
+
+/* Content Section Images */
+.content-section img {
+  display: block;
+  max-width: 80%; /* Adjust the percentage as needed */
+  height: auto;
+  margin: 40px auto; /* Centers the image and adds vertical spacing */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+}
+
