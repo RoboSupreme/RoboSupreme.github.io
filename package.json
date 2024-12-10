@@ -1,0 +1,17 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "matter-js": "^0.19.0",
+    "poly-decomp": "^0.3.0",
+    "pathseg": "^1.2.1"
+  }
+}
