@@ -9,11 +9,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- Include jQuery -->
     <script src="jquery.min.js"></script>
-    <!-- Include Matter.js -->
-    <script src="matter.js"></script>
 </head>
 <body>
-
     <!-- Rotating Letters Animation -->
     <div class="rotating-letters">
         <div class="letter-container">
@@ -69,6 +66,9 @@
     <div class="content-section">
         <img src="images/image3.jpg" alt="Description of Image 3">
     </div>
+    <div class="content-section">
+        <img src="images/image4.jpeg" alt="Description of Image 4">
+    </div>
 
     <!-- Matter.js Canvas -->
     <div id="matter-container">
@@ -92,5 +92,19 @@
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         });
     </script>
+
+    <!-- Falling Letters Section -->
+    <div class="falling-letters-container">
+        <div class="falling-letters-inner">
+            <div id="left"></div>
+            <div id="right"></div>
+        </div>
+    </div>
+
+    <!-- Include Matter.js Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.min.js"></script>
+    <script src="falling-letters-2.js"></script>
 </body>
 </html>

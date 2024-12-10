@@ -18,7 +18,9 @@ body {
   flex-direction: column; /* Vertical stacking */
   justify-content: center;
   align-items: center;
-  margin-top: 60px; /* Added top margin */
+  margin-top: 30px; /* Reduced margin */
+  position: relative;  /* For z-index to work */
+  z-index: 2;         /* Above the falling letters */
 }
 
 /* Heading style */
@@ -110,10 +112,12 @@ h1 {
 
 /* Style for additional content sections */
 .content-section {
-  padding: 50px;
+  padding: 20px;  /* Reduced padding */
   text-align: center;
   color: #333333; /* Changed to dark gray for section text */
   font-size: 24px;
+  position: relative;  /* For z-index to work */
+  z-index: 2;  /* Above the falling letters */
 }
 
 /* Rotating Letters Animation */
@@ -261,25 +265,23 @@ h1 {
 
 /* Dark Mode Styles */
 body.dark-mode {
-  background-color: #121212; /* Changed to a darker background */
-  color: #e0e0e0;            /* Changed to light gray text */
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
 body.dark-mode h1,
-body.dark-mode h2,
 body.dark-mode p,
-body.dark-mode a,
+body.dark-mode .menu-overlay nav ul li a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .menu-overlay {
+  background-color: rgba(18, 18, 18, 0.95);
+}
+
+body.dark-mode h2,
 body.dark-mode .letter {
   color: #e0e0e0; /* Light gray text in dark mode */
-}
-
-/* Menu Overlay Styles in Dark Mode */
-body.dark-mode .menu-overlay {
-  background-color: rgba(18, 18, 18, 0.95); /* Darker overlay background */
-}
-
-body.dark-mode .menu-overlay nav ul li a {
-  color: #e0e0e0; /* Light gray menu links in dark mode */
 }
 
 body.dark-mode .menu-overlay nav ul li a:hover {
@@ -365,8 +367,39 @@ body.dark-mode #darkModeToggle:hover {
   display: block;
   max-width: 80%; /* Adjust the percentage as needed */
   height: auto;
-  margin: 40px auto; /* Centers the image and adds vertical spacing */
+  margin: 20px auto;  /* Reduced margin */
   border-radius: 10px; /* Optional: Adds rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  position: relative;  /* For z-index to work */
+  z-index: 2;  /* Above the falling letters */
 }
 
+/* Falling Letters Container */
+.falling-letters-container {
+  position: absolute;
+  top: 3000px;  /* Move it down */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  pointer-events: none;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.falling-letters-container .falling-letters-inner {
+  display: flex;
+  gap: 0;             /* Remove gap between containers */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.falling-letters-container #left,
+.falling-letters-container #right {
+  width: 50%;         /* Make each side take up exactly half */
+  height: 100%;       /* Full height */
+  background: transparent;
+  border: none;
+}
