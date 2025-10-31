@@ -150,7 +150,7 @@ h1 {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 4; /* Ensure the button stays on top */
+  z-index: 1001; /* Ensure the button stays on top */
   width: 75px;
   height: 100px;
   border: none;
@@ -219,7 +219,7 @@ h1 {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 2; /* Below the menu button */
+  z-index: 1000; /* Higher z-index to ensure content displays */
 }
 
 .menu-overlay nav ul {
@@ -345,15 +345,15 @@ body.dark-mode #darkModeToggle:hover {
 
 /* Adjust z-indexes to ensure elements stack correctly */
 .rotating-letters {
-  z-index: 3;
+  z-index: 2;
 }
 
 .menu-btn {
-  z-index: 4;
+  z-index: 1001; /* Increased to be above menu overlay */
 }
 
 .menu-overlay {
-  z-index: 2;
+  z-index: 1000; /* Higher than content but lower than menu button */
 }
 
 /* Ensure background elements have lower z-index */

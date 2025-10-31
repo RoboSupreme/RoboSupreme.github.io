@@ -60,10 +60,24 @@ window.addEventListener('load', function() {
 document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('menu-btn');
     const menuOverlay = document.getElementById('menu-overlay');
-
-    menuBtn.addEventListener('click', () => {
+    const navLinks = document.querySelectorAll('.menu-overlay nav ul li a');
+    
+    // Function to toggle menu state
+    function toggleMenu() {
         menuBtn.classList.toggle('open');
         menuOverlay.classList.toggle('open');
+    }
+    
+    // Toggle menu when button is clicked
+    menuBtn.addEventListener('click', toggleMenu);
+    
+    // Close menu when any navigation link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Close the menu
+            menuBtn.classList.remove('open');
+            menuOverlay.classList.remove('open');
+        });
     });
 });
 
