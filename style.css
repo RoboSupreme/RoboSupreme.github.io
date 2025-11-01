@@ -374,14 +374,93 @@ body.dark-mode #darkModeToggle:hover {
   z-index: 2;  /* Above the falling letters */
 }
 
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 1100px) {
+  .video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-card {
+  background: #ffffff;
+  border: 2px solid #333333;
+  border-radius: 12px;
+  padding: 16px 16px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.dark-mode .video-card {
+  background: #1e1e1e;
+  border-color: #e0e0e0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.video-title {
+  font-size: 24px;
+  color: #333333;
+  text-align: left;
+}
+
+body.dark-mode .video-title {
+  color: #e0e0e0;
+}
+
+.video-player {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  outline: none;
+  background: #000;
+}
+
+.button.cta {
+  margin-top: 4px;
+  align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.button.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 123, 255, 0.35);
+}
+
+.button.cta .button-arrow {
+  transition: transform 0.2s ease;
+}
+
+.button.cta:hover .button-arrow {
+  transform: translateX(4px);
+}
+
 /* Falling Letters Container */
 .falling-letters-container {
-  position: absolute;
-  top: 3000px;  /* Move it down */
+  position: relative;
   left: 0;
   width: 100%;
-  height: 100%;
-  margin-top: 0;
+  height: 100vh;
+  margin-top: 40px;
   pointer-events: none;
   background: transparent;
   overflow: hidden;
